@@ -1,0 +1,66 @@
+name: 'Run pytest'
+description: GitHub Action to run pytest tests with GitHub Job Summaries support.
+author: Pavel Zwerschke
+branding: 
+  icon: file-text
+  color: 'blue'
+inputs:
+  job-summary:
+    description: Print a GitHub job summary
+    required: false
+    default: 'true'
+  verbose:
+    description: Verbose output
+    required: false
+    default: 'true'
+  emoji:
+    description: Use emojis in the output
+    required: false
+    default: 'true'
+  custom-arguments:
+    description: Custom arguments to pass to pytest
+    required: false
+    default: ''
+  custom-pytest:
+    description: Custom command to replace the `pytest` call. Can be a custom executable or something like `poetry run pytest` or `micromamba run -n myenv pytest`.
+    required: false
+    default: 'pytest'
+  report-title:
+    description: Title of the report
+    required: false
+    default: 'Test Report'
+  click-to-expand:
+    description: Add 'Click to expand' to the report
+    required: false
+    default: 'true'
+runs:
+  using: "composite"
+  steps:
+    - name: Run pytest
+      id: pytest
+      run: |
+        REPORT="$(mktemp)"
+        echo "report-path=$REPORT" >> $GITHUB_OUTPUT
+        ${{ inputs.custom-pytest }}${{ inputs.verbose == 'true' && ' -v' || '' }}${{ inputs.job-summary == 'true' && ' --md=$REPORT' || '' }}${{ inputs.emoji == 'true' && ' --emoji' || '' }}${{ inputs.custom-arguments != '' && ' ' || '' }}${{ inputs.custom-arguments }}
+      shell: bash -el {0}  # use login shell to source .bashrc for environments
+    - name: Add report to summary
+      # run even if pytest fails
+      if: always() && inputs.job-summary == 'true'
+      run: |
+        echo "::group::..."
+        FINAL_REPORT="$(mktemp)"
+        echo "# ${{ inputs.report-title }}" > "$FINAL_REPORT"
+        if [ ${{ inputs.click-to-expand }} = true ]; then
+          echo "<details><summary>Click to expand!</summary>" >> "$FINAL_REPORT"
+        fi
+        tail -n+2 "${{ steps.pytest.outputs.report-path }}" >> "$FINAL_REPORT"
+        if [ ${{ inputs.click-to-expand }} = true ]; then
+          echo "</details>" >> "$FINAL_REPORT"
+        fi
+        cat "$FINAL_REPORT" >> "$GITHUB_STEP_SUMMARY"
+        echo "::endgroup::"
+        echo
+        echo "====================================================================================="
+        echo Markdown summaries: "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+        echo "====================================================================================="
+      shell: bash
