@@ -1,0 +1,16 @@
+# action.yml
+name: 'NPM E2E'
+description: 'Greet someone and record the time'
+inputs:
+  command: 
+    description: 'Command to run'
+    required: false
+    default: ''
+outputs:
+  output:
+    description: 'Output'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.command }}
