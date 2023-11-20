@@ -1,4 +1,4 @@
 #!/bin/sh -l
 
-echo Hello >> $GITHUB_OUTPUT
+echo Hello
 #$1 >> $GITHUB_OUTPUT
