@@ -19,12 +19,12 @@ inputs:
 runs:
   using: "composite"
   steps:
-     - name: Generate .env file
+     - id: env_file
       if: inputs.env_vars != ''
-      run: echo "${{ inputs.env_vars }}" > "${{ inputs.env_file }}"
       shell: bash
+      run: echo "${{ inputs.env_vars }}" > "${{ inputs.env_file }}"
     - id: tests
-      name: Run tests
+      shell: bash
       run: |
         cd ${{ inputs.folder }}
         npm install
@@ -69,4 +69,3 @@ runs:
         else
           exit 0
         fi
-      shell: bash
