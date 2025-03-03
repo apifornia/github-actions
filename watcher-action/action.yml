@@ -19,10 +19,12 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - id: env_file
-      #if: inputs.env_vars != ''
-      shell: bash
-      run: echo "${{ inputs.env_vars }}" > "${{ inputs.env_file }}"
+#    - id: env_file
+#      shell: bash
+#      run: |
+#        if [ """${{ inputs.env_vars }}""" != "" ]; then
+#          echo "${{ inputs.env_vars }}" > "${{ inputs.env_file }}"
+#        fi
     - id: tests
       shell: bash
       run: |
