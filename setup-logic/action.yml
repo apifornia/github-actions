@@ -1,9 +1,9 @@
 name: 'Setup Logic'
 description: ''
-  outputs:
-    CALLER_REPO_NAME: ${{ steps.setup.outputs.CALLER_REPO_NAME }}
-    DEPLOY_RUNNER: ${{ steps.setup.outputs.DEPLOY_RUNNER }}
-    EXTRA_TAG: ${{ steps.setup.outputs.EXTRA_TAG }}
+outputs:
+  CALLER_REPO_NAME: ${{ steps.setup.outputs.CALLER_REPO_NAME }}
+  DEPLOY_RUNNER: ${{ steps.setup.outputs.DEPLOY_RUNNER }}
+  EXTRA_TAG: ${{ steps.setup.outputs.EXTRA_TAG }}
 runs:
   using: "composite"
   steps:
