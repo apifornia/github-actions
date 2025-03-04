@@ -6,6 +6,7 @@ description: ''
     EXTRA_TAG: ${{ steps.setup.outputs.EXTRA_TAG }}
 runs:
   using: "composite"
+  runs-on: apifornia-builder
   steps:
     - id: setup
       shell: bash
