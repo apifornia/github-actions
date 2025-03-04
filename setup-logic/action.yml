@@ -1,9 +1,15 @@
 name: 'Setup Logic'
 description: ''
 outputs:
-  CALLER_REPO_NAME: ${{ steps.setup.outputs.CALLER_REPO_NAME }}
-  DEPLOY_RUNNER: ${{ steps.setup.outputs.DEPLOY_RUNNER }}
-  EXTRA_TAG: ${{ steps.setup.outputs.EXTRA_TAG }}
+  CALLER_REPO_NAME:
+    description: "Only name of the repo itself"
+    value: ${{ steps.setup.outputs.CALLER_REPO_NAME }}
+  DEPLOY_RUNNER:
+    description: "Runner for env deployment"
+    value: ${{ steps.setup.outputs.DEPLOY_RUNNER }}
+  EXTRA_TAG:
+    description: "Extra tag for built image"
+    value: ${{ steps.setup.outputs.EXTRA_TAG }}
 runs:
   using: "composite"
   steps:
