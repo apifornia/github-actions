@@ -19,6 +19,7 @@ inputs:
 runs:
   using: "composite"
   steps:
+# disabled because env file generation should be done in steps of workflow
 #    - id: env_file
 #      shell: bash
 #      run: |
