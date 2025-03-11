@@ -25,7 +25,7 @@ runs:
 #        if [ """${{ inputs.env_vars }}""" != "" ]; then
 #          echo "${{ inputs.env_vars }}" > "${{ inputs.env_file }}"
 #        fi
-    - id: tests
+    - id: e2e_tests
       shell: bash
       run: |
         cd ${{ inputs.folder }}
