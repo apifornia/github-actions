@@ -1,4 +1,4 @@
-name: 'NPM E22 / Watcher'
+name: 'NPM E2E / Watcher'
 description: ''
 inputs:
   runs_on:
