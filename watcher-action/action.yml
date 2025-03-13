@@ -30,6 +30,7 @@ runs:
       shell: bash
       run: |
         cd ${{ inputs.folder }}
+        cat ${{ inputs.env_file }}
         npm install
         # CLEANUP
         docker container rm ${RUNNER_NAME}-cypress || true
