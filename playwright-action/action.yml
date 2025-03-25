@@ -35,7 +35,7 @@ runs:
         # RUN TESTS
         docker run \
           --name ${RUNNER_NAME}-playwright \
-          --env-file	${{ inputs.env }}.env \
+          --env-file ${{ inputs.env_file }} \
           -v ${LOCAL_FOLDER}/work/watcher/watcher:/e2e \
           -w /e2e \
           playwright/included:latest \
