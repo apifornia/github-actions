@@ -36,8 +36,8 @@ runs:
         docker run \
           --name ${RUNNER_NAME}-playwright \
           --env-file ${{ inputs.env_file }} \
-          -v ${LOCAL_FOLDER}/work/watcher/watcher:/e2e \
-          -w /e2e \
+          -v ${LOCAL_FOLDER}/work/watcher2/watcher2:/app \
+          -w /app \
           mcr.microsoft.com/playwright:v1.51.1 || true
         # # POST ACTIONS
         # docker logs ${RUNNER_NAME}-playwright | ansi2html > /tmp/runner/work/playwright_save/log.html
