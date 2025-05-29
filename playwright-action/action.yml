@@ -47,8 +47,10 @@ runs:
         docker logs ${RUNNER_NAME}-playwright | ansi2html > /tmp/runner/work/playwright_save/log.html
         # docker logs ${RUNNER_NAME}-playwright > /tmp/runner/work/playwright_save/log.txt
         # python3 getmsg.py /tmp/runner/work/playwright_save/log.txt > /tmp/runner/work/playwright_save/failing_flow.txt || true
-        # cp -r ./playwright/screenshots/ /tmp/runner/work/playwright_save/ || true
-        # echo "====playwright====="
+        cp -r ./playwright/test-results /tmp/runner/work/playwright_save/ || true
+        #  npx playwright show-trace test-results/nodes-input--node-input-creating-configure-and-execution-chromium-retry1/trace.zip
+        echo "====playwright====="
+        ls /tmp/runner/work/playwright_save/*
         # ls ./playwright/**
         
         # # Find files with commas and rename them
