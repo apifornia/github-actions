@@ -40,7 +40,7 @@ runs:
           --env-file ${{ inputs.env_file }} \
           -v ${LOCAL_FOLDER}/work/watcher2/watcher2:/app \
           -w /app \
-          mcr.microsoft.com/playwright:v1.50.1 \
+          mcr.microsoft.com/playwright:v1.52.0 \
           npm run test || true
         
         # POST ACTIONS
