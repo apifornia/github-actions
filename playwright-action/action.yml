@@ -64,6 +64,7 @@ runs:
             done
         done
         echo "=========== test-results"
+        touch ./test-results 
         ls ./test-results/**
         cp ./test-results/*.zip /tmp/runner/work/playwright_save/
         # Find files with commas and rename them
