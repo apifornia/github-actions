@@ -64,7 +64,7 @@ runs:
                 cp "$file" "$ROOT_DIR/${subdir}_${filename}"
             done
         done
-        
+        cp "./test-results/*.zip" "/tmp/runner/work/playwright_save/"
         # Find files with commas and rename them
         find "/tmp/runner/work/playwright_save/" -type f -name "*,*" | while read -r file; do
             # Get the directory and filename
