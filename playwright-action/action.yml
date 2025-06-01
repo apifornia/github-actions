@@ -52,13 +52,14 @@ runs:
         #  npx playwright show-trace test-results/nodes-input--node-input-creating-configure-and-execution-chromium-retry1/trace.zip
         echo "====playwright====="
                 
-        ROOT_DIR=./test-results
+        ROOT_DIR="./test-results"
         # Loop through all subdirectories
         find "$ROOT_DIR" -mindepth 1 -maxdepth 1 -type d | while read dir; do
             subdir=$(basename "$dir")
             # Loop through all files in the subdirectory
             find "$dir" -type f | while read file; do
                 filename=$(basename "$file")
+                echo "rename" $filename
                 # Copy file to root dir with prefix
                 cp "$file" "$ROOT_DIR/${subdir}_${filename}"
             done
