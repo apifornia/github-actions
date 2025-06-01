@@ -64,8 +64,6 @@ runs:
                 cp "$file" "$ROOT_DIR/${subdir}_${filename}"
             done
         done
-        echo "=========== test-results"
-        ls "./test-results/**"
         echo "=========== test-results unqouted"
         ls ./test-results/**
         echo "=========== ls **"
