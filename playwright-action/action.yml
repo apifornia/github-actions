@@ -27,7 +27,8 @@ runs:
 #        fi
     - id: tests
       shell: bash
-      run: |
+      # next comment  in `run` line is used for code highlight in VSCode
+      run: | # shell
         npm install
         
         # CLEANUP
@@ -47,27 +48,38 @@ runs:
         docker logs ${RUNNER_NAME}-playwright | ansi2html > /tmp/runner/work/playwright_save/log.html
         # docker logs ${RUNNER_NAME}-playwright > /tmp/runner/work/playwright_save/log.txt
         # python3 getmsg.py /tmp/runner/work/playwright_save/log.txt > /tmp/runner/work/playwright_save/failing_flow.txt || true
-        cp -r ./playwright/test-results /tmp/runner/work/playwright_save/ || true
+        # cp -r ./playwright/test-results /tmp/runner/work/playwright_save/ || true
         #  npx playwright show-trace test-results/nodes-input--node-input-creating-configure-and-execution-chromium-retry1/trace.zip
         echo "====playwright====="
+                
+        ROOT_DIR=./test-results
+        # Loop through all subdirectories
+        find "$ROOT_DIR" -mindepth 1 -maxdepth 1 -type d | while read dir; do
+            subdir=$(basename "$dir")
+            # Loop through all files in the subdirectory
+            find "$dir" -type f | while read file; do
+                filename=$(basename "$file")
+                # Copy file to root dir with prefix
+                cp "$file" "$ROOT_DIR/${subdir}_${filename}"
+            done
+        done
+        
+        # Find files with commas and rename them
+        find "/tmp/runner/work/playwright_save/" -type f -name "*,*" | while read -r file; do
+            # Get the directory and filename
+            dir=$(dirname "$file")
+            base=$(basename "$file")
+              
+            # Replace commas with underscores in the filename
+            new_base=$(echo "$base" | sed 's/,/_/g')
+              
+            # Rename the file
+            mv "$file" "$dir/$new_base"
+        done
+        
         ls /tmp/runner/work/playwright_save/*
-        # ls ./playwright/**
-        
-        # # Find files with commas and rename them
-        # find "/tmp/runner/work/playwright_save/" -type f -name "*,*" | while read -r file; do
-        #     # Get the directory and filename
-        #     dir=$(dirname "$file")
-        #     base=$(basename "$file")
-              
-        #     # Replace commas with underscores in the filename
-        #     new_base=$(echo "$base" | sed 's/,/_/g')
-              
-        #     # Rename the file
-        #     mv "$file" "$dir/$new_base"
-        # done
-        
-        # echo "====save====="
-        # ls /tmp/runner/work/playwright_save/**
+        echo "====save====="
+        ls /tmp/runner/work/playwright_save/**
 
         zip -r /tmp/runner/work/playwright_save/test-results.zip ./test-results
         
