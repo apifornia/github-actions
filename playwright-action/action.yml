@@ -59,15 +59,12 @@ runs:
             # Loop through all files in the subdirectory
             find "$dir" -type f | while read file; do
                 filename=$(basename "$file")
-                echo "rename" $filename
                 # Copy file to root dir with prefix
                 cp "$file" "$ROOT_DIR/${subdir}_${filename}"
             done
         done
-        echo "=========== test-results unqouted"
+        echo "=========== test-results"
         ls ./test-results/**
-        echo "=========== ls **"
-        ls **
         cp ./test-results/*.zip /tmp/runner/work/playwright_save/
         # Find files with commas and rename them
         find "/tmp/runner/work/playwright_save/" -type f -name "*,*" | while read -r file; do
@@ -82,12 +79,8 @@ runs:
             mv "$file" "$dir/$new_base"
         done
         
-        ls /tmp/runner/work/playwright_save/*
         echo "====save====="
-        ls /tmp/runner/work/playwright_save/**
-
-        zip -r /tmp/runner/work/playwright_save/test-results.zip ./test-results
-        
+        ls /tmp/runner/work/playwright_save/**        
         EXIT=$(docker inspect ${RUNNER_NAME}-playwright --format='{{.State.ExitCode}}')
         if [ "$EXIT" != "0" ]; then
           exit 1
