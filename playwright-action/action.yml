@@ -29,8 +29,8 @@ runs:
       shell: bash
       # next comment  in `run` line is used for code highlight in VSCode
       run: | # shell
+        export CI=true
         npm install
-        
         # CLEANUP
         docker container rm ${RUNNER_NAME}-playwright || true
         rm -rf /tmp/runner/work/playwright_save/ || true && mkdir -p /tmp/runner/work/playwright_save/ || true
