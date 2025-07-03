@@ -29,7 +29,6 @@ runs:
       shell: bash
       # next comment  in `run` line is used for code highlight in VSCode
       run: | # shell
-        export CI=true
         npm install
         # CLEANUP
         docker container rm ${RUNNER_NAME}-playwright || true
@@ -39,6 +38,7 @@ runs:
         docker run \
           --name ${RUNNER_NAME}-playwright \
           --env-file ${{ inputs.env_file }} \
+          -e CI=true
           -v ${LOCAL_FOLDER}/work/watcher2/watcher2:/app \
           -w /app \
           mcr.microsoft.com/playwright:v1.52.0 \
