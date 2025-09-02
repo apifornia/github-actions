@@ -47,7 +47,7 @@ runs:
           fi
           
           if [ ${GITHUB_REF_NAME} == 'prod' ]; then
-            EXTRA_TAG="dev"
+            EXTRA_TAG="prod"
             echo "EXTRA_TAG=${EXTRA_TAG}" >> $GITHUB_OUTPUT
             DEPLOY_RUNNER="apifornia-prod"
             echo "DEPLOY_RUNNER=${DEPLOY_RUNNER}" >> $GITHUB_OUTPUT
