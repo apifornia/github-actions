@@ -29,8 +29,6 @@ runs:
       shell: bash
       # next comment  in `run` line is used for code highlight in VSCode
       run: | # shell
-        pwd
-        ls -lah
         #if [ "${{ inputs.folder }}" != "./" ]; then
           #cd ${LOCAL_FOLDER}/work/${{ inputs.folder }}
         #fi
@@ -44,7 +42,7 @@ runs:
         if [ "${{ inputs.folder }}" != "./" ]; then
           docker run \
             --name ${RUNNER_NAME}-playwright \
-            --env-file ${{ inputs.folder }}/${{ inputs.env_file }} \
+            --env-file ${{ inputs.env_file }} \
             -e CI=true \
             -v ${LOCAL_FOLDER}/work/${{ inputs.folder }}:/app \
             -w /app \
