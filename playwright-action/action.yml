@@ -29,6 +29,8 @@ runs:
       shell: bash
       # next comment  in `run` line is used for code highlight in VSCode
       run: | # shell
+        pwd
+        ls -lah
         #if [ "${{ inputs.folder }}" != "./" ]; then
           #cd ${LOCAL_FOLDER}/work/${{ inputs.folder }}
         #fi
