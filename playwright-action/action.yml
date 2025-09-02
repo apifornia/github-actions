@@ -44,8 +44,7 @@ runs:
         if [ "${{ inputs.folder }}" != "./" ]; then
           docker run \
             --name ${RUNNER_NAME}-playwright \
-            #--env-file ${LOCAL_FOLDER}/work/${{ inputs.folder }}/${{ inputs.env_file }} \
-            --env-file ${{ inputs.env_file }} \
+            --env-file ${{ inputs.folder }}/${{ inputs.env_file }} \
             -e CI=true \
             -v ${LOCAL_FOLDER}/work/${{ inputs.folder }}:/app \
             -w /app \
