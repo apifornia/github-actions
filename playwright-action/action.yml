@@ -12,6 +12,10 @@ inputs:
     type: string
     default: ".env"
     required: false
+  change_dir:
+    type: string
+    default: ""
+    required: false
   folder:
     type: string
     default: "./"
@@ -29,9 +33,9 @@ runs:
       shell: bash
       # next comment  in `run` line is used for code highlight in VSCode
       run: | # shell
-        #if [ "${{ inputs.folder }}" != "./" ]; then
-          #cd ${LOCAL_FOLDER}/work/${{ inputs.folder }}
-        #fi
+        if [ "${{ inputs.change_dir }}" != "" ]; then
+          cd ${{ inputs.change_dir }}
+        fi
         
         npm install
         # CLEANUP
