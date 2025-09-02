@@ -63,8 +63,6 @@ runs:
             npm run test || true
         fi
         
-        sleep 10m
-        
         # POST ACTIONS
         docker logs ${RUNNER_NAME}-playwright | ansi2html > /tmp/runner/work/playwright_save/log.html
         # docker logs ${RUNNER_NAME}-playwright > /tmp/runner/work/playwright_save/log.txt
