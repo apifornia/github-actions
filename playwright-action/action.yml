@@ -39,6 +39,7 @@ runs:
         
         npm install
         # CLEANUP
+        docker kill rm ${RUNNER_NAME}-playwright || true
         docker container rm ${RUNNER_NAME}-playwright || true
         rm -rf /tmp/runner/work/playwright_save/ || true && mkdir -p /tmp/runner/work/playwright_save/ || true
         
