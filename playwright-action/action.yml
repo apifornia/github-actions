@@ -53,7 +53,7 @@ runs:
             --name ${RUNNER_NAME}-playwright \
             --env-file ${{ inputs.env_file }} \
             -e CI=true \
-            -e INGORE_HTTPS=${{ inputs.ignore_https }} \
+            -e IGNORE_HTTPS=${{ inputs.ignore_https }} \
             -v ${LOCAL_FOLDER}/work/${{ inputs.folder }}:/app \
             -w /app \
             mcr.microsoft.com/playwright:v1.52.0 \
@@ -63,7 +63,7 @@ runs:
             --name ${RUNNER_NAME}-playwright \
             --env-file ${{ inputs.env_file }} \
             -e CI=true \
-            -e INGORE_HTTPS=${{ inputs.ignore_https }} \
+            -e IGNORE_HTTPS=${{ inputs.ignore_https }} \
             -v ${LOCAL_FOLDER}/work/watcher2/watcher2:/app \
             -w /app \
             mcr.microsoft.com/playwright:v1.52.0 \
