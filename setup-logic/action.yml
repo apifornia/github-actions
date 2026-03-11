@@ -1,6 +1,23 @@
 name: 'Setup Logic'
 description: ''
+
+inputs:
+  APP_NAME:
+    description: 'App name'
+    required: false
+    default: ''
+  NAMESPACE:
+    description: 'App namespace'
+    required: false
+    default: ''
+
 outputs:
+  APP_NAME:
+    description: 'App name'
+    value: ${{ steps.setup.outputs.APP_NAME }}
+  NAMESPACE:
+    description: 'App namespace'
+    value: ${{ steps.setup.outputs.NAMESPACE }}
   CALLER_REPO_NAME:
     description: "Only name of the repo itself"
     value: ${{ steps.setup.outputs.CALLER_REPO_NAME }}
@@ -10,6 +27,7 @@ outputs:
   EXTRA_TAG:
     description: "Extra tag for built image"
     value: ${{ steps.setup.outputs.EXTRA_TAG }}
+
 runs:
   using: "composite"
   steps:
@@ -19,6 +37,22 @@ runs:
         split=(${GITHUB_REPOSITORY//\// })
         
         echo "CALLER_REPO_NAME=${split[1]}" >> $GITHUB_OUTPUT
+
+        if [ ${{ inputs.APP_NAME }} == '' ]; then
+          echo "APP_NAME=${split[1]}" >> $GITHUB_OUTPUT
+          echo "APP_NAME=${split[1]}"
+        else
+          echo "APP_NAME=${{ inputs.APP_NAME }}" >> $GITHUB_OUTPUT
+          echo "APP_NAME=${{ inputs.APP_NAME }}"
+        fi
+
+        if [ ${{ inputs.NAMESPACE }} == '' ]; then
+          echo "NAMESPACE=${split[1]}" >> $GITHUB_OUTPUT
+          echo "NAMESPACE=${split[1]}"
+        else
+          echo "NAMESPACE=${{ inputs.NAMESPACE }}" >> $GITHUB_OUTPUT
+          echo "NAMESPACE=${{ inputs.NAMESPACE }}"
+        fi
         
         # check if this is a PR or not
         if [ ${GITHUB_EVENT_NAME} == 'pull_request' ]; then
