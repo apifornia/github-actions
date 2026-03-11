@@ -38,7 +38,7 @@ runs:
         
         echo "CALLER_REPO_NAME=${split[1]}" >> $GITHUB_OUTPUT
 
-        if [ ${{ inputs.APP_NAME }} == '' ]; then
+        if [ "${{ inputs.APP_NAME }}" == '' ]; then
           echo "APP_NAME=${split[1]}" >> $GITHUB_OUTPUT
           echo "APP_NAME=${split[1]}"
         else
@@ -46,7 +46,7 @@ runs:
           echo "APP_NAME=${{ inputs.APP_NAME }}"
         fi
 
-        if [ ${{ inputs.NAMESPACE }} == '' ]; then
+        if [ "${{ inputs.NAMESPACE }}" == '' ]; then
           echo "NAMESPACE=${split[1]}" >> $GITHUB_OUTPUT
           echo "NAMESPACE=${split[1]}"
         else
