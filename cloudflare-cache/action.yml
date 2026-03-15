@@ -1,0 +1,33 @@
+name: 'Clean Cloudflare cache'
+description: 'Clean Cloudflare cache'
+inputs:
+  runs_on:
+    type: string
+    default: "apifornia-builder"
+    required: true
+    zone_id:
+      required: true
+    token:
+      required: true
+    hosts:
+      required: false
+runs:
+  using: "composite"
+  steps:
+    - id: tests
+      shell: bash
+      # next comment  in `run` line is used for code highlight in VSCode
+      run: | # shell
+        echo "::add-mask::${{ inputs.zone_id }}"
+        echo "::add-mask::${{ inputs.token }}"
+        if [ "${{ inputs.required }}" == "" ]; then
+          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ inputs.zone_id }}/purge_cache" \
+            -H "Authorization: Bearer ${{ inputs.token }}" \
+            -H "Content-Type: application/json" \
+            -d '{"purge_everything": true}'
+        else
+          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ inputs.zone_id }}/purge_cache" \
+            -H "Authorization: Bearer ${{ inputs.token }}" \
+            -H "Content-Type: application/json" \
+            -d '{"hosts":["${{ inputs.hosts }}"]}'
+        fi
