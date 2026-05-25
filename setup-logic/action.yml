@@ -93,7 +93,7 @@ runs:
             fi
           fi
 
-          if [ "${{ inputs.CUSTOM_TAG }}" != '' ]; then
+          if [ "${{ inputs.CUSTOM_TAG }}" == 'true' ]; then
             EXTRA_TAG="${GITHUB_REF_NAME}"
             echo "EXTRA_TAG=${EXTRA_TAG}" >> $GITHUB_OUTPUT
             DEPLOY_RUNNER="apifornia-prod"
