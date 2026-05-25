@@ -91,7 +91,6 @@ runs:
             echo "DEPLOY_RUNNER=${DEPLOY_RUNNER}" >> $GITHUB_OUTPUT
             OK="yes"
             fi
-          fi
 
           if [ "${{ inputs.CUSTOM_TAG }}" == 'true' ]; then
             EXTRA_TAG="${GITHUB_REF_NAME}"
