@@ -113,15 +113,6 @@ runs:
               echo "DEPLOY_RUNNER=${DEPLOY_RUNNER}" >> $GITHUB_OUTPUT
               OK="yes"
             fi
-
-            if [ ${GITHUB_REF_NAME} == 'multiversion_deploy' ]; then
-              EXTRA_TAG="dev"
-              echo "EXTRA_TAG=${EXTRA_TAG}" >> $GITHUB_OUTPUT
-              DEPLOY_RUNNER="apifornia-dev"
-              echo "DEPLOY_RUNNER=${DEPLOY_RUNNER}" >> $GITHUB_OUTPUT
-              OK="yes"
-            fi
-            
           fi
         fi
 
